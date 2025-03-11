@@ -85,6 +85,10 @@ export const loginUser = async (req: Request, res: Response) => {
             return;
         }
 
+        if (!user.password) {
+            return res.status(400).json({ message: 'Invalid email or password' });
+        }
+
         // Cek password
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
