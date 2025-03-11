@@ -1,0 +1,10 @@
+import RegisView from '@/views/RegisterView'
+import React from 'react'
+
+export default function index() {
+    return (
+        <div>
+            <RegisView />
+        </div>
+    )
+}
