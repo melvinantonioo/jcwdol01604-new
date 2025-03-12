@@ -16,7 +16,8 @@ import pricingRoutes from '@/routers/pricing.routes';
 import roomRoutes from '@/routers/room.routes';
 import orderRoutes from "@/routers/order.routes";
 
-import googleLoginRoute from '@/routers/social.routes'
+import googleLoginRoute from '@/routers/social.routes';
+import reviewRoutes from "@/routers/review.routes";
 
 
 import dotenv from "dotenv";
@@ -54,6 +55,7 @@ app.use('/api/room', roomRoutes)
 app.use("/api/dashboard/bookings", orderRoutes);
 
 app.use("/api/login", googleLoginRoute);
+app.use("/api/reviews", reviewRoutes);
 
 
 app.use(ErrorMiddleware);

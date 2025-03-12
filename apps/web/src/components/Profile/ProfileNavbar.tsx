@@ -5,15 +5,14 @@ import { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { useRouter } from "next/navigation";
+import Logo from '@/utils/Logo';
 
 const ProfileNavbar: React.FC = () => {
     const router = useRouter();
-
-
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
 
-    const { user, clearAuth } = useAuthStore(); //zustand
+    const { user, clearAuth } = useAuthStore(); 
     console.log(`user dari global state:`, user);
 
     const toggleMenu = () => {
@@ -32,7 +31,7 @@ const ProfileNavbar: React.FC = () => {
     return (
         <nav className="flex items-center justify-between p-4 bg-white shadow-md">
             {/* Logo */}
-            <div className="text-orange-600 font-bold text-2xl">P</div>
+            <Logo />
 
             {/* Create Button */}
             <div className="hidden md:flex items-center space-x-4">
@@ -55,7 +54,6 @@ const ProfileNavbar: React.FC = () => {
                 >
                     <div className="bg-blue-600 text-white font-bold rounded-full h-8 w-8 flex items-center justify-center">
                         {user?.name?.[0]?.toUpperCase() || "U"}
-                        {/* {user?.profilePicture || "U"} */}
                     </div>
                     <span className="hidden md:inline-block font-medium">{user?.name || "Guest"}</span>
                     <MdKeyboardArrowDown size={20} />

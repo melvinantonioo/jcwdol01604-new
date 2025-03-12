@@ -10,9 +10,9 @@ const ProfileSidebar: React.FC = () => {
                 <Link href="/profile" className="flex items-center p-4 hover:bg-gray-200 transition">
                     <FaHome className="mr-2" /> Profile Home
                 </Link>
-                {/* <Link href="/profile/edit-profile" className="flex items-center p-4 hover:bg-gray-200 transition">
-                    <FaCalendarAlt className="mr-2" /> Edit Profile
-                </Link> */}
+                <Link href="/profile/review" className="flex items-center p-4 hover:bg-gray-200 transition">
+                    <FaCalendarAlt className="mr-2" /> Reviews
+                </Link>
                 <Link href="/profile/bookings" className="flex items-center p-4 hover:bg-gray-200 transition">
                     <FaFileInvoiceDollar className="mr-2" /> Booking & Order
                 </Link>

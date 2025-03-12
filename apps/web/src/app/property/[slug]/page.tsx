@@ -6,18 +6,16 @@ import axiosInstance from "@/lib/AxiosInstance";
 import ListingHead from "@/components/Listing/ListingHead";
 import ListingInfo from "@/components/Listing/ListingInfo";
 import { categories } from "@/components/CategoryBox/Categories";
-
 import { usePathname } from "next/navigation";
 import ClientCompopnent from "@/layouts/ClientComponent";
-
 import dynamic from "next/dynamic";
 import { HomeLayouts } from "@/layouts/HomeLayouts";
 import Button from "@/utils/Button";
 import BookingModal from "@/components/Modals/BookingModal";
-
 import { fetchGeolocation } from "@/utils/geolocation";  
 import CheckPricing from "@/components/Pricing";
-
+import FacilityAndRules from "@/components/Properties/Facility";
+import ReviewsList from "@/utils/Review/ReviewList";
 
 const Map2 = dynamic(() => import("@/utils/Map2"), {
     ssr: false,         
@@ -44,7 +42,7 @@ const ListingDetail = () => {
     const [loading, setLoading] = useState(true);
     const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
 
-    const [geoLocation, setGeoLocation] = useState<[number, number] | null>(null); // Koordinat untuk Map2
+    const [geoLocation, setGeoLocation] = useState<[number, number] | null>(null); 
 
     useEffect(() => {
         const slug = pathname?.split("/")[2];
@@ -57,11 +55,10 @@ const ListingDetail = () => {
                 const { data } = await axiosInstance.get(`/property/slug/${slug}`);
                 setProperty(data);
 
-                // 🏡 Setelah properti berhasil diambil, cari geolokasi berdasarkan lokasi & region
                 if (data.location && data.region) {
                     const coords = await fetchGeolocation(data.location, data.region);
                     if (coords !== null) {
-                        setGeoLocation(coords as [number, number]); // ✅ Paksa tipe data
+                        setGeoLocation(coords as [number, number]); 
                     }
                 }
             } catch (error) {
@@ -117,9 +114,14 @@ const ListingDetail = () => {
                                 locationValue={property.location}
                                 bathroomCount={property.rooms.length}
                             />
-                            {/* 🔹 Map dengan koordinat yang sudah dicari */}
-                            {/* <Map2 center={geoLocation ?? undefined} /> */}
+
+                            <FacilityAndRules />
+
                             {geoLocation ? <Map2 center={geoLocation} /> : <p className="text-gray-500">📍 Lokasi belum tersedia</p>}
+
+                            {/* ✅ Komponen Reviews */}
+                            <h2 className="text-xl font-semibold mt-6">Review & Rating</h2>
+                            <ReviewsList propertyId={Number(property.id)} />
 
                             {/* BUTTON BOOKING */}
                             <div className="flex justify-center mt-4">

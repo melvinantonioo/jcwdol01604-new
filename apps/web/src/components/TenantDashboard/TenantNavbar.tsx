@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { useRouter } from "next/navigation";
+import Logo from '@/utils/Logo';
 
 const Navbar: React.FC = () => {
     const router = useRouter();
@@ -31,7 +32,8 @@ const Navbar: React.FC = () => {
     return (
         <nav className="flex items-center justify-between p-4 bg-white shadow-md">
             {/* Logo */}
-            <div className="text-orange-600 font-bold text-2xl">Tenant</div>
+            {/* <div className="text-orange-600 font-bold text-2xl">Tenant</div> */}
+            <Logo />
 
             {/* Create Button */}
             <div className="hidden md:flex items-center space-x-4">

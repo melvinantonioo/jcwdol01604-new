@@ -131,6 +131,7 @@ export const getPropertyDetailsBySlug = async (req: Request, res: Response) => {
             basePrice: property.basePrice,
             category: property.category?.name,
             tenant: property.tenant,
+            imageUrl: property.imageUrl,
             rooms: property.rooms.map(room => ({
                 id: room.id,
                 name: room.name,

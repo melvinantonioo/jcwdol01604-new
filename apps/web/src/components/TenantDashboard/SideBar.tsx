@@ -19,6 +19,12 @@ const Sidebar: React.FC = () => {
                 <Link href="/admin/peak-season" className="flex items-center p-4 hover:bg-gray-200 transition">
                     <FaChartBar className="mr-2" /> Peak Season
                 </Link>
+                <Link href="/admin/sales-report" className="flex items-center p-4 hover:bg-gray-200 transition">
+                    <FaChartBar className="mr-2" /> Sales Report
+                </Link>
+                <Link href="/admin/review" className="flex items-center p-4 hover:bg-gray-200 transition">
+                    <FaChartBar className="mr-2" /> Review Rating
+                </Link>
                 <Link href="/admin/settings" className="flex items-center p-4 hover:bg-gray-200 transition">
                     <FaCog className="mr-2" /> Settings
                 </Link>
