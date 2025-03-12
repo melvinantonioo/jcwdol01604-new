@@ -9,11 +9,14 @@ const protectedRoutes = ["/admin", "/dashboard", "/profile"];
 
 export default async function middleware(req: NextRequest) {
     try {
+
         const isProtected = protectedRoutes.some((path) =>
             req.nextUrl.pathname.startsWith(path)
         );
 
-        const token = req.cookies.get("access_token")?.value || ""; 
+
+        const token = req.cookies.get("access_token")?.value || ""; //gunakan ini fixed
+
 
         if (isProtected && !token) {
             return NextResponse.redirect(new URL("/login", req.nextUrl));

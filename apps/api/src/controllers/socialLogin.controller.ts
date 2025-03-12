@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Request, Response } from "express";
 import prisma from "../prisma"; // Sesuaikan dengan struktur project kamu
 import jwt from "jsonwebtoken";
@@ -37,4 +38,17 @@ export const registerGoogleUser = async (req: Request, res: Response) => {
     }
 };
 
+=======
+// import { SessionProvider } from "next-auth/react"
+
+// export default function App({
+//     Component, pageProps: { session, ...pageProps }
+// }) {
+//     return (
+//         <SessionProvider session= { session } >
+//         <Component { ...pageProps } />
+//         </SessionProvider>
+//   )
+// }   Import ke layout
+>>>>>>> 3dc3ddf4c2fd839e0f6ad1367e2ab26b50bba9b8
 

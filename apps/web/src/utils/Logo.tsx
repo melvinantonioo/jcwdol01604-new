@@ -17,9 +17,11 @@ const Logo = () => {
             <Image
                 alt="logo"
                 className='hidden md:block cursor-pointer'
+
                 height="50"
                 width="50"
                 src="/MinimalistLogo.png"
+
             />  
         </Link>
     )

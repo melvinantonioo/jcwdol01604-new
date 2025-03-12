@@ -20,8 +20,10 @@ model User {
   role           Role      @default(USER)
   name           String
   email          String    @unique
+
   password       String?  //update
   provider       String?  //update
+
   emailVerified  Boolean   @default(false)
   emailVerificationToken String?  
   resetPasswordToken   String?   
