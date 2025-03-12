@@ -82,7 +82,7 @@ export default function SearchModal({ onClose }: SearchModalProps) {
         items-center 
         justify-center 
         z-50
-      "
+        "
         >
             {/* Container Modal */}
             <div className="bg-white w-full max-w-md mx-auto rounded-lg shadow-lg relative">

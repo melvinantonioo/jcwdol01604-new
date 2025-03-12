@@ -24,7 +24,7 @@ const Footer = () => {
           <div>
             <h3 className="font-bold text-gray-900">Komunitas</h3>
             <ul className="mt-3 space-y-2">
-              <li><Link href="#" className="hover:underline">Airbnb.org</Link></li>
+              <li><Link href="#" className="hover:underline">AirRoom.org</Link></li>
               <li><Link href="#" className="hover:underline">Program Referral</Link></li>
               <li><Link href="#" className="hover:underline">Dukungan Keberlanjutan</Link></li>
             </ul>
@@ -32,7 +32,7 @@ const Footer = () => {
 
           {/* Airbnb */}
           <div>
-            <h3 className="font-bold text-gray-900">Airbnb</h3>
+            <h3 className="font-bold text-gray-900">AirRoom</h3>
             <ul className="mt-3 space-y-2">
               <li><Link href="#" className="hover:underline">Tentang Kami</Link></li>
               <li><Link href="#" className="hover:underline">Berita</Link></li>
@@ -55,7 +55,7 @@ const Footer = () => {
 
         {/* 🔥 Copyright & Legal */}
         <div className="border-t mt-6 pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-500">
-          <p>© 2024 Airbnb Clone. Semua Hak Dilindungi.</p>
+          <p>© 2024 AirRoom Clone. Semua Hak Dilindungi.</p>
           <div className="flex space-x-4 mt-3 sm:mt-0">
             <Link href="#" className="hover:underline">Privasi</Link>
             <Link href="#" className="hover:underline">Persyaratan</Link>
