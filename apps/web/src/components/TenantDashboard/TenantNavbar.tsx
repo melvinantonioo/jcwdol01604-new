@@ -6,6 +6,8 @@ import { FaBars, FaTimes } from 'react-icons/fa';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { useRouter } from "next/navigation";
 import Logo from '@/utils/Logo';
+import Avatar from '@/utils/Avatar';
+import Image from 'next/image';
 
 const Navbar: React.FC = () => {
     const router = useRouter();
@@ -28,6 +30,8 @@ const Navbar: React.FC = () => {
         clearAuth();
         router.push("/");
     };
+
+    const avatarUrl = user?.profilePicture || "/avatar-1.jpg";
 
     return (
         <nav className="flex items-center justify-between p-4 bg-white shadow-md">
@@ -55,7 +59,16 @@ const Navbar: React.FC = () => {
                     onClick={toggleAccountMenu}
                 >
                     <div className="bg-blue-600 text-white font-bold rounded-full h-8 w-8 flex items-center justify-center">
-                        {user?.email?.[0]?.toUpperCase() || "U"}
+                        {/* {user?.profilePicture || "U"} */}
+                        <Image
+                                    className='rounded-full'
+                                    height="30"
+                                    width="30"
+                                    alt='Avatar'
+                                        src={avatarUrl}
+                                        // src="/avatar-1.jpg"
+                                    />
+                        {/* <Avatar /> */}
                     </div>
                     <span className="hidden md:inline-block font-medium">{user?.name || "Guest"}</span>
                     <MdKeyboardArrowDown size={20} />

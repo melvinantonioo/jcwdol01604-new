@@ -14,3 +14,12 @@ declare global {
         }
     }
 }
+
+export interface RequestWithUser extends Request {
+    user?: {
+        id: number;
+        name: string;
+        email: string;
+        role: string;
+    };
+}

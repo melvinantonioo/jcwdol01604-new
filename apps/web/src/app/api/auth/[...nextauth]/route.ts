@@ -10,7 +10,6 @@ export const authOptions: NextAuthOptions = {
         GoogleProvider({
             clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!,
             clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET!,
-
         }),
     ],
     callbacks: {
@@ -27,7 +26,6 @@ export const authOptions: NextAuthOptions = {
                 const data = response.data;
                 if (!response.status.toString().startsWith("2")) throw new Error(data.message || "Login failed");
 
-                // ✅ Simpan token dari Backend di user
                 user.backendAccessToken = data.token;
             } catch (error) {
                 console.error("Error during Google sign-in:", error);

@@ -5,6 +5,7 @@ import OrderCard from "./BookingCard";
 import SearchBar from "./ProfileSearch";
 import { motion } from "framer-motion";
 import Swal from "sweetalert2";
+import ProfileOrderCard2 from "./BookingCard2";
 
 interface Booking {
     id: number;
@@ -68,7 +69,7 @@ const ProfileOrderList = () => {
                 ) : (
                     bookings.map((booking) => (
                         <motion.div key={booking.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
-                            <OrderCard booking={booking} />
+                            <ProfileOrderCard2 booking={booking} />
                         </motion.div>
                     ))
                 )}

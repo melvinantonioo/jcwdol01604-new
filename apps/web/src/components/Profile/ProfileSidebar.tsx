@@ -16,12 +16,6 @@ const ProfileSidebar: React.FC = () => {
                 <Link href="/profile/bookings" className="flex items-center p-4 hover:bg-gray-200 transition">
                     <FaFileInvoiceDollar className="mr-2" /> Booking & Order
                 </Link>
-                {/* <Link href="/admin/peak-season" className="flex items-center p-4 hover:bg-gray-200 transition">
-                    <FaChartBar className="mr-2" /> Peak Season
-                </Link>
-                <Link href="/admin/settings" className="flex items-center p-4 hover:bg-gray-200 transition">
-                    <FaCog className="mr-2" /> Settings
-                </Link> */}
             </nav>
         </aside>
     );

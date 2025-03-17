@@ -163,8 +163,8 @@ const FilterModal = () => {
                     "
                                     >
                                         <option value="">(Default)</option>
-                                        <option value="priceAsc">Termurah → Termahal</option>
-                                        <option value="priceDesc">Termahal → Termurah</option>
+                                        <option value="price_asc">Termurah → Termahal</option>
+                                        <option value="price_dsc">Termahal → Termurah</option>
                                     </Field>
                                     <ErrorMessage
                                         name="sort"

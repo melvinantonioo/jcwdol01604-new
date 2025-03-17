@@ -123,3 +123,54 @@ export const updateProfile = async (req: Request, res: Response) => {
         return res.status(500).json({ message: "Gagal memperbarui profil" });
     }
 };
+
+export const updateEmail = async (req: Request, res: Response) => {
+    try {
+        const { email } = req.body;
+        const userId = req.user?.id;
+
+        if (!userId) {
+            return res.status(401).json({ message: "Unauthorized" });
+        }
+
+        if (!email) {
+            return res.status(400).json({ message: "Email baru wajib diisi" });
+        }
+
+        // ✅ Cek apakah email sudah digunakan
+        const existingUser = await prisma.user.findUnique({ where: { email } });
+        if (existingUser) {
+            return res.status(400).json({ message: "Email sudah digunakan" });
+        }
+
+        // ✅ Buat token verifikasi baru
+        const emailVerificationToken = crypto.randomBytes(32).toString("hex");
+        const emailVerificationExpires = new Date(Date.now() + 2 * 60 * 60 * 1000); // 2 jam kedaluwarsa
+
+        // ✅ Update email & status verifikasi
+        await prisma.user.update({
+            where: { id: userId },
+            data: {
+                email,
+                emailVerified: false, // Harus diverifikasi lagi
+                emailVerificationToken,
+                emailVerificationExpires,
+            },
+        });
+
+        // ✅ Kirim email verifikasi ulang
+        const verificationLink = `${process.env.BASE_WEB_URL}/verify-email?token=${emailVerificationToken}`;
+
+        await transporter.sendMail({
+            to: email,
+            subject: "Verifikasi Email Baru",
+            html: `<p>Silakan verifikasi email baru Anda dengan mengklik link berikut:</p>
+                <a href="${verificationLink}">Verifikasi Email</a>`,
+        });
+
+        res.status(200).json({ message: "Email berhasil diperbarui, cek email Anda untuk verifikasi" });
+    } catch (error) {
+        console.error("❌ Error updating email:", error);
+        res.status(500).json({ message: "Terjadi kesalahan saat mengganti email" });
+    }
+};

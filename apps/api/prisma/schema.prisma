@@ -21,11 +21,12 @@ model User {
   name           String
   email          String    @unique
 
-  password       String?  //update
-  provider       String?  //update
+  password       String?  
+  provider       String?  
 
   emailVerified  Boolean   @default(false)
   emailVerificationToken String?  
+  emailVerificationExpires DateTime?
   resetPasswordToken   String?   
   resetPasswordExpires DateTime? 
   profilePicture String?
@@ -47,7 +48,7 @@ model Property {
   location    String?
   region      String?   
   basePrice   Float
-   imageUrl    String?   
+  imageUrl    String?   
   isDeleted   Boolean   @default(false)
   deletedAt   DateTime?
   createdAt   DateTime  @default(now())

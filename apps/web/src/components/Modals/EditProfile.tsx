@@ -38,7 +38,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen, onClose, pr
 
     const handleSave = async () => {
         try {
-            // **1️⃣ Upload Foto ke Cloudinary**
+            
             let profilePictureUrl = profile.profilePicture;
             if (selectedFile) {
                 const formData = new FormData();
@@ -47,15 +47,14 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen, onClose, pr
                 profilePictureUrl = uploadRes.data.profilePicture;
             }
 
-            // **2️⃣ Update Data User**
             const response = await axiosInstance.put("/profile/update", {
                 ...formData,
                 profilePicture: profilePictureUrl,
             });
 
             Swal.fire("Success", response.data.message, "success").then(() => {
-                onClose(); // ✅ Tutup modal setelah update berhasil
-                window.location.reload(); // ✅ Refresh untuk update UI
+                onClose(); 
+                window.location.reload(); 
             });
         } catch (error) {
             Swal.fire("Error", "Gagal memperbarui profil", "error");
@@ -72,11 +71,11 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen, onClose, pr
             actionLabel="Save Changes"
             body={
                 <div className="flex flex-col gap-4">
-                    {/* ✅ Upload Foto */}
+                    
                     <label className="font-medium">Upload Foto Profil:</label>
                     <input type="file" accept="image/*" onChange={handleFileChange} className="border rounded p-2" />
 
-                    {/* ✅ Nama */}
+                    
                     <label className="font-medium">Nama:</label>
                     <input
                         type="text"
@@ -86,17 +85,6 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({ isOpen, onClose, pr
                         className="border rounded p-2"
                     />
 
-                    {/* ✅ Email */}
-                    <label className="font-medium">Email:</label>
-                    <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        className="border rounded p-2"
-                    />
-
-                    {/* ✅ Password (Opsional) */}
                     <label className="font-medium">Password (Opsional):</label>
                     <input
                         type="password"

@@ -26,6 +26,7 @@ export const registerUser = async (req: Request, res: Response) => {
         const hashedPassword = await bcrypt.hash(password, salt);
 
         const emailVerificationToken = crypto.randomBytes(32).toString("hex");
+        const emailVerificationExpires = new Date(Date.now() + 2 * 60 * 60 * 1000); // Expired 2 jam
 
         const newUser = await prisma.user.create({
             data: {
@@ -34,6 +35,7 @@ export const registerUser = async (req: Request, res: Response) => {
                 password: hashedPassword,
                 role,
                 emailVerificationToken,
+                emailVerificationExpires,
             },
         });
 
@@ -67,7 +69,6 @@ export const loginUser = async (req: Request, res: Response) => {
     const { email, password } = req.body;
 
     try {
-        // Cari user berdasarkan email
         const user = await prisma.user.findUnique({
             where: { email },
             select: {

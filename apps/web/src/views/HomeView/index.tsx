@@ -10,6 +10,7 @@ import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import SearchResult from '../SearchResultView';
 import { PropertyTypes } from '@/types/property';
+import Swal from 'sweetalert2';
 
 interface Property {
     id: number;
@@ -53,6 +54,28 @@ export default function HomeViews() {
         '/Banner2.avif',
         '/Banner3.avif',
     ];
+
+    useEffect(() => {
+        const checkEmailVerification = async () => {
+            try {
+                const response = await axiosInstance.get("/profile/getEmail");
+                const user = response.data;
+
+                if (!user.emailVerified) {
+                    Swal.fire({
+                        title: "Verifikasi Email",
+                        text: "Akun Anda belum diverifikasi. Silakan cek email Anda untuk verifikasi.",
+                        icon: "warning",
+                        confirmButtonText: "OK",
+                    });
+                }
+            } catch (error) {
+                console.error("Error checking email verification:", error);
+            }
+        };
+
+        checkEmailVerification();
+    }, []);
 
     useEffect(() => {
         const fetchProperties = async () => {

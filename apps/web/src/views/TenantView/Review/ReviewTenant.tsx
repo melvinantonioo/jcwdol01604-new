@@ -3,14 +3,14 @@
 import { useEffect, useState } from "react";
 import axiosInstance from "@/lib/AxiosInstance";
 import Empty from "@/utils/EmptyHandler";
-import ReviewCard from "./Card";
+import ReviewCard from "./Card2"; 
 
 interface Review {
     id: number;
     rating: number;
     comment: string;
     createdAt: string;
-    user: { name: string };
+    user: { name: string; profilePicture?: string };
     property: { id: number; name: string };
 }
 
@@ -22,9 +22,13 @@ const TenantReviews = () => {
         const fetchReviews = async () => {
             try {
                 setLoading(true);
-                const response = await axiosInstance.get("/api/reviews/tenant"); 
-                console.log("Data Review Tenant",response.data) 
-                setReviews(response.data);
+                const response = await axiosInstance.get("/api/reviews/tenant");
+
+                if (Array.isArray(response.data)) {
+                    setReviews(response.data);
+                } else {
+                    setReviews([]); 
+                }
             } catch (error) {
                 console.error("Error fetching tenant reviews:", error);
             } finally {
@@ -46,5 +50,6 @@ const TenantReviews = () => {
         </div>
     );
 };
+
 
 export default TenantReviews;

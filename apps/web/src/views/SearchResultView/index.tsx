@@ -1,5 +1,4 @@
 "use client";
-
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import axiosInstance from "@/lib/AxiosInstance";
@@ -50,12 +49,18 @@ export default function SearchResult() {
                 if (endDate) query.set("endDate", endDate);
                 if (categoryId) query.set("categoryId", categoryId);
                 if (sort) query.set("sort", sort);
-                if (minPrice) query.set("minPrice", minPrice);
-                if (maxPrice) query.set("maxPrice", maxPrice);
+                // if (minPrice) query.set("minPrice", minPrice);
+                // if (maxPrice) query.set("maxPrice", maxPrice);
+                if (minPrice) query.set("minPrice", Number(minPrice).toString());
+                if (maxPrice) query.set("maxPrice", Number(maxPrice).toString());
                 query.set("page", currentPage.toString());
                 query.set("pageSize", pageSize.toString());
+                
+                console.log("🔎 Query Params yang dikirim: ", {
+                    location, startDate, endDate, categoryId, sort, minPrice, maxPrice
+                });
 
-                // Panggil backend /api/search
+                
                 const url = `/api/search?${query.toString()}`;
                 const { data } = await axiosInstance.get(url);
 

@@ -14,6 +14,7 @@ interface ModalProps {
     disabled?: boolean;
     secondaryAction?: () => void;
     secondaryActionLabel?: string;
+    children?: React.ReactNode; // ✅ Tambahkan children
 
 }
 
@@ -28,6 +29,7 @@ const Modal: React.FC<ModalProps> = ({
     disabled,
     secondaryAction,
     secondaryActionLabel,
+    children, // ✅ Gunakan children
 }) => {
     const [showModal, setShowModal] = useState(isOpen);
 
