@@ -11,14 +11,14 @@ interface StepPriceProps {
 
 const StepPrice: React.FC<StepPriceProps> = ({ errors, touched }) => {
     const { values, setFieldValue } = useFormikContext<{
-        basePrice: string;
+        basePrice: string; 
     }>();
 
     return (
         <div className="flex flex-col gap-8">
             <Heading
                 title="Harga Properti"
-                subtitle="Atur harga dasar untuk properti Anda"
+                subtitle="Harga Termurah Room anda , untuk diiklankan"
             />
             <div className="flex flex-col gap-4">
                 <label>Harga Dasar (per malam)</label>

@@ -9,16 +9,14 @@ export const getTenantDashboardProperties = async (req: Request, res: Response) 
             return res.status(403).json({ message: "Akses ditolak" });
         }
 
-        const page = parseInt(req.query.page as string) || 1; // Default page 1
-        const limit = parseInt(req.query.limit as string) || 10; // Default 10 items per page
+        const page = parseInt(req.query.page as string) || 1; 
+        const limit = parseInt(req.query.limit as string) || 10; 
         const skip = (page - 1) * limit;
 
-        // Ambil total properti untuk pagination
         const totalProperties = await prisma.property.count({
             where: { tenantId, isDeleted: false },
         });
 
-        // Ambil properti dengan pagination
         const properties = await prisma.property.findMany({
             where: { tenantId, isDeleted: false },
             include: {

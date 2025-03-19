@@ -31,7 +31,7 @@ export interface JWTPayload {
 }
 
 
-// Update Request type definition
+
 declare global {
     namespace Express {
         interface Request {

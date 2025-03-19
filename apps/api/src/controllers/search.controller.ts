@@ -3,7 +3,7 @@ import prisma from "@/prisma";
 
 export const searchProperties = async (req: Request, res: Response) => {
     try {
-        // Ambil query params
+
         const {
             name,
             location,
@@ -22,7 +22,7 @@ export const searchProperties = async (req: Request, res: Response) => {
             });
         }
 
-        // Konversi tipe data numeric
+
         const pageNum = parseInt(page as string, 10) || 1;
         const sizeNum = parseInt(pageSize as string, 10) || 10;
         const catIdNum = categoryId ? parseInt(categoryId as string, 10) : undefined;
@@ -85,8 +85,8 @@ export const searchProperties = async (req: Request, res: Response) => {
                     bookings: {
                         none: {
                             AND: [
-                                { startDate: { lt: end } }, // startDate < end
-                                { endDate: { gt: start } }, // endDate > start
+                                { startDate: { lt: end } }, 
+                                { endDate: { gt: start } }, 
                                 { status: { not: "CANCELLED" } },
                             ],
                         },
@@ -102,7 +102,7 @@ export const searchProperties = async (req: Request, res: Response) => {
             };
         }
 
-        // Query ke DB
+
         const [count, items] = await Promise.all([
             prisma.property.count({ where: whereClause }),
             prisma.property.findMany({

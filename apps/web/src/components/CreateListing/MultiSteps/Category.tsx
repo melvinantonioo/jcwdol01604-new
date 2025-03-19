@@ -12,7 +12,7 @@ interface StepCategoryProps {
 }
 
 const StepCategory: React.FC<StepCategoryProps> = ({ errors, touched }) => {
-    // Ambil values dari Formik
+
     const { values, setFieldValue } = useFormikContext<{ category: string }>();
 
     return (

@@ -1,11 +1,7 @@
 "use client";
-
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
-
 import NavbarCreate from '@/components/CreateListing/Components/NavbarCreate';
-
-// Import step components
 import StepCategory from '@/components/CreateListing/MultiSteps/Category';
 import StepLocation from '@/components/CreateListing/MultiSteps/Location';
 import StepInfo from '@/components/CreateListing/MultiSteps/Info';
@@ -14,7 +10,6 @@ import StepPrice from '@/components/CreateListing/MultiSteps/Price';
 import StepImages from '@/components/CreateListing/MultiSteps/Images';
 import StepReview from '@/components/CreateListing/MultiSteps/Reviews';
 
-// Import Yup schemas
 import {
     CategorySchema,
     LocationSchema,
@@ -25,15 +20,10 @@ import {
     ReviewSchema,
 } from '@/components/CreateListing/Validation/index';
 
-// Import reusable Button
 import Button from '@/utils/Button';
 import StepRooms2 from '@/components/CreateListing/MultiSteps/Rooms2';
 import axiosInstance from '@/lib/AxiosInstance';
 
-/**
- * Kita definisikan total step (0 sampai 6).
- * Masing-masing step punya schema validasi sendiri.
- */
 const validationSchemas = [
     CategorySchema,
     LocationSchema,
@@ -41,44 +31,42 @@ const validationSchemas = [
     RoomsSchema,
     PriceSchema,
     ImagesSchema,
-    ReviewSchema, // Step 6
+    ReviewSchema, 
 ];
 
 export default function CreatePropertyPage() {
-    // Step penanda multi-step
+    
     const [step, setStep] = useState(0);
 
-    // Initial values untuk semua field yang diperlukan
+    
     const initialValues = {
         category: '',
         location: '',
         region: '',
         name: '',
         description: '',
-        rooms: [], // ⬅️ Array kosong, akan diisi room
-        // bathrooms: 1,
-        // maxGuests: 1,
+        rooms: [], 
         basePrice: '',
-        images: [] as File[], // ⬅️ File untuk upload gambar
-        isDeleted: false,       // default false
+        images: [] as File[], 
+        isDeleted: false,       
     };
 
-    // Handler untuk ke step selanjutnya
+
     const handleNext = async (
         validateForm: any,
         errors: any,
         setTouched: any,
         values: any
     ) => {
-        // Validasi step saat ini
+
         const currentSchema = validationSchemas[step];
         try {
-            // Validate hanya field yang relevan di step ini
+            
             await currentSchema.validate(values, { abortEarly: false });
-            // Jika lolos validasi, lanjut step
+            
             setStep((prev) => prev + 1);
         } catch (err: any) {
-            // Jika error, setTouched untuk menampilkan error
+            
             const touchedFields = Object.keys(err.inner?.reduce?.((acc: any, curr: any) => {
                 acc[curr.path] = true;
                 return acc;
@@ -92,17 +80,17 @@ export default function CreatePropertyPage() {
         }
     };
 
-    // Handler untuk ke step sebelumnya
+
     const handleBack = () => {
         setStep((prev) => prev - 1);
     };
 
-    // ✅ Submit final (step terakhir)
+
     const onSubmitFinal = async (values: any) => {
         try {
             console.log("✅ Data sebelum dikirim:", values);
 
-            // 🔹 Gunakan FormData untuk mengirim file & JSON
+
             const formData = new FormData();
             formData.append("name", values.name);
             formData.append("categoryId", values.category);
@@ -111,15 +99,12 @@ export default function CreatePropertyPage() {
             formData.append("region", values.region);
             formData.append("basePrice", values.basePrice);
 
-            // 🔹 JSON.stringify untuk rooms (harus dikirim dalam string)
             formData.append("rooms", JSON.stringify(values.rooms));
 
-            // 🔹 Upload semua gambar
             values.images.forEach((file: File) => {
                 formData.append("file", file);
             });
 
-            // 🔹 Kirim ke backend menggunakan axiosInstance
             const response = await axiosInstance.post("/property/create-listing", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
@@ -140,7 +125,7 @@ export default function CreatePropertyPage() {
             <div className="flex-1 flex flex-col items-center justify-center p-4">
                 <Formik
                     initialValues={initialValues}
-                    // Validasi di-handle manual per step (bukan di sini)
+                    
                     onSubmit={onSubmitFinal}
                 >
                     {({ values, errors, touched, validateForm, setTouched }) => (
@@ -172,7 +157,7 @@ export default function CreatePropertyPage() {
                                         label="Selanjutnya"
                                         onClick={async (e) => {
                                             e.preventDefault();
-                                            // Lakukan validasi step
+                                            
                                             await handleNext(validateForm, errors, setTouched, values);
                                         }}
                                     />

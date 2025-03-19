@@ -40,15 +40,10 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile }) => {
                 </div>
             </div>
 
-            {/* <div className="mt-4">
-                <Button label="Edit Profile" onClick={() => router.push("/profile/edit")} />
-            </div> */}
-
             <div className="mt-4">
                 <Button label="Edit Profile" onClick={() => setIsModalOpen(true)} />
             </div>
 
-            {/* ✅ MODAL EDIT PROFILE */}
             <EditProfileModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} profile={profile} />
         </div>
     );

@@ -19,7 +19,6 @@ export const createBooking = async (req: Request, res: Response) => {
             return res.status(400).json({ message: "Tanggal check-out harus lebih besar dari check-in" });
         }
 
-        // **1️⃣ Ambil data kamar termasuk harga & kapasitas**
         const room = await prisma.room.findUnique({
             where: { id: roomId },
             include: {
@@ -38,7 +37,6 @@ export const createBooking = async (req: Request, res: Response) => {
             return res.status(404).json({ message: "Kamar tidak ditemukan" });
         }
 
-        // **2️⃣ Cek apakah kamar sudah dibooking untuk tanggal yang sama**
         const existingBookings = await prisma.booking.findMany({
             where: {
                 roomId,
@@ -49,7 +47,6 @@ export const createBooking = async (req: Request, res: Response) => {
             }
         });
 
-        // **Hitung jumlah kamar yang sudah dibooking**
         const bookedRooms = existingBookings.length;
         const availableRooms = room.maxGuests - bookedRooms;
 
@@ -59,15 +56,15 @@ export const createBooking = async (req: Request, res: Response) => {
             });
         }
 
-        // **3️⃣ Hitung total harga dengan Peak Season Adjustment**
+
         let totalPrice = 0;
         const priceBreakdown = [];
         let currentDate = new Date(start);
 
         while (currentDate < end) {
-            let adjustedPrice = room.price; // Default base price
+            let adjustedPrice = room.price;
 
-            // Cek apakah ada peak season pada tanggal ini
+
             const peakRate = room.peakSeasonRates.find(rate =>
                 currentDate >= rate.startDate && currentDate <= rate.endDate
             );
@@ -90,7 +87,6 @@ export const createBooking = async (req: Request, res: Response) => {
             currentDate.setDate(currentDate.getDate() + 1);
         }
 
-        // **4️⃣ Buat booking & update RoomAvailability**
         const booking = await prisma.$transaction(async (tx) => {
             const newBooking = await tx.booking.create({
                 data: {
@@ -103,7 +99,7 @@ export const createBooking = async (req: Request, res: Response) => {
                 }
             });
 
-            // **Update RoomAvailability**
+
             await tx.roomAvailability.updateMany({
                 where: {
                     roomId,
@@ -127,12 +123,6 @@ export const createBooking = async (req: Request, res: Response) => {
     }
 };
 
-
-
-
-
-
-//get Booking 
 export const getBookingDetails = async (req: Request, res: Response) => {
     try {
         const { bookingId } = req.params;

@@ -1,10 +1,11 @@
-
 import { Request, Response } from "express";
-import prisma from "../prisma"; // Sesuaikan dengan struktur project kamu
+import prisma from "../prisma"; 
 import jwt from "jsonwebtoken";
 
 export const registerGoogleUser = async (req: Request, res: Response) => {
     try {
+        console.log(" Incoming Google login request:", req.body);
+
         const { email, name, picture } = req.body;
 
         if (!email) {
@@ -14,7 +15,7 @@ export const registerGoogleUser = async (req: Request, res: Response) => {
         let user = await prisma.user.findUnique({ where: { email } });
 
         if (!user) {
-            // Jika user belum ada, buat user baru
+
             user = await prisma.user.create({
                 data: {
                     name,
@@ -26,10 +27,14 @@ export const registerGoogleUser = async (req: Request, res: Response) => {
             });
         }
 
-        // 🔥 Buat JWT Token dari backend Express.js
-        const token = jwt.sign({ id: user.id, email: user.email, role: user.role }, process.env.JWT_SECRET as string, {
+        console.log("🔑 Generating JWT...");
+
+
+        const token = jwt.sign({ id: user.id, email: user.email, role: user.role }, process.env.SECRET_KEY as string, {
             expiresIn: "7d",
         });
+
+        // console.log("Google login successful:", user);
 
         res.json({ token, user });
     } catch (error) {

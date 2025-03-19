@@ -14,7 +14,6 @@ const StepImages: React.FC = () => {
         const fileArray = Array.from(files);
         setFieldValue("images", fileArray);
 
-        // Preview Gambar
         setPreviews(fileArray.map(file => URL.createObjectURL(file)));
     };
 

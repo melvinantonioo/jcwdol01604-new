@@ -35,7 +35,10 @@ const ProfileNavbar: React.FC = () => {
 
             {/* Create Button */}
             <div className="hidden md:flex items-center space-x-4">
-                <button className="border border-zinc-600 text-zinc-600 py-1 px-3 rounded-full hover:bg-zinc-600 hover:text-white transition">
+                <button
+                    className="border border-zinc-600 text-zinc-600 py-1 px-3 rounded-full hover:bg-zinc-600 hover:text-white transition"
+                    onClick={() => router.push('/admin/create')}
+                >
                     + Create
                 </button>
             </div>

@@ -10,17 +10,14 @@ import { Readable } from "stream";
 
 const prisma = new PrismaClient();
 
-// ✅ Konfigurasi Cloudinary
 cloudinaryV2.config({
     api_key: process.env.CLOUDINARY_API_KEY || "",
     api_secret: process.env.CLOUDINARY_API_SECRET || "",
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME || "",
 });
 
-// ✅ Middleware Multer
 export const upload = multer({ storage: multer.memoryStorage() });
 
-// ✅ Fungsi Upload ke Cloudinary
 export const uploadToCloudinary = (fileBuffer: Buffer, folder = "property_images"): Promise<string> => {
     return new Promise((resolve, reject) => {
         const stream = cloudinaryV2.uploader.upload_stream({ folder }, (error, result) => {
@@ -44,12 +41,10 @@ export const createPropertyWithRooms = async (req: Request, res: Response) => {
 
         let imageUrl: string | null = null;
 
-        // ✅ Jika ada file gambar, upload ke Cloudinary
         if (req.file) {
             imageUrl = await uploadToCloudinary(req.file.buffer);
         }
 
-        // ✅ Simpan Property ke Database
         const newProperty = await prisma.property.create({
             data: {
                 tenantId,
@@ -64,18 +59,17 @@ export const createPropertyWithRooms = async (req: Request, res: Response) => {
             },
         });
 
-        // ✅ Simpan Room Jika Ada
         if (rooms) {
-            const parsedRooms = JSON.parse(rooms); // 🟢 Parsing JSON string dari frontend
+            const parsedRooms = JSON.parse(rooms); 
 
             const roomData = parsedRooms.map((room: any) => ({
-                propertyId: newProperty.id, // Set propertyId dari properti yang baru dibuat
+                propertyId: newProperty.id, 
                 name: room.name,
                 price: Number(room.price),
                 maxGuests: Number(room.maxGuests),
             }));
 
-            await prisma.room.createMany({ data: roomData }); // 🟢 Insert semua room sekaligus
+            await prisma.room.createMany({ data: roomData }); 
         }
 
         res.status(201).json({ message: "Properti & Rooms berhasil dibuat.", property: newProperty });
@@ -91,9 +85,8 @@ export const createPropertyWithRooms2 = async (req: Request, res: Response) => {
         const tenantId = req.user?.id;
         if (!tenantId) return res.status(401).json({ error: "Unauthorized" });
 
-        // ✅ Cari categoryId berdasarkan nama kategori
         const category = await prisma.propertyCategory.findFirst({
-            where: { name: categoryName }, // 🟢 Mencari berdasarkan nama
+            where: { name: categoryName }, 
         });
 
         if (!category) {
@@ -105,13 +98,12 @@ export const createPropertyWithRooms2 = async (req: Request, res: Response) => {
             imageUrl = await uploadToCloudinary(req.file.buffer);
         }
 
-        // ✅ Simpan Property ke Database dengan categoryId
         const newProperty = await prisma.property.create({
             data: {
                 tenantId,
                 name,
                 slug: name.toLowerCase().replace(/\s+/g, "-"),
-                categoryId: category.id, // 🔥 Gunakan categoryId hasil pencarian
+                categoryId: category.id, 
                 description,
                 location,
                 region,
@@ -120,9 +112,8 @@ export const createPropertyWithRooms2 = async (req: Request, res: Response) => {
             },
         });
 
-        // ✅ Simpan Room Jika Ada
         if (rooms) {
-            const parsedRooms = JSON.parse(rooms); // 🟢 Parsing JSON dari frontend
+            const parsedRooms = JSON.parse(rooms); 
 
             const roomData = parsedRooms.map((room: any) => ({
                 propertyId: newProperty.id,

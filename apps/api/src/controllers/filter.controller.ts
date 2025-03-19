@@ -12,12 +12,10 @@ export const searchProperties = async (req: Request, res: Response) => {
             return res.status(400).json({ message: "Start date dan end date wajib diisi" });
         }
 
-        // Konversi tanggal ke objek Date
         const start = new Date(startDate as string);
         const end = new Date(endDate as string);
         const guests = numGuests ? parseInt(numGuests as string) : 1;
 
-        // Cari properti berdasarkan lokasi dan region
         let properties = await prisma.property.findMany({
             where: {
                 AND: [
@@ -39,18 +37,15 @@ export const searchProperties = async (req: Request, res: Response) => {
             },
         });
 
-        // Filter properti yang memiliki kamar sesuai jumlah tamu
         properties = properties.filter((property) =>
             property.rooms.some((room: Prisma.RoomGetPayload<{ include: { availability: true } }>) => room.maxGuests >= guests)
         );
 
-        // Tandai properti yang tersedia/tidak tersedia
         properties = properties.map((property) => ({
             ...property,
             isAvailable: property.rooms.some((room: Prisma.RoomGetPayload<{ include: { availability: true } }>) => room.availability.length > 0),
         }));
 
-        // Sorting harga termurah → termahal atau sebaliknya
         if (sortBy === "price_asc") {
             properties.sort((a, b) => a.basePrice - b.basePrice);
         } else if (sortBy === "price_desc") {
@@ -69,7 +64,6 @@ export const searchProperties = async (req: Request, res: Response) => {
 
 export async function getPropertiesFilter(req: Request, res: Response) {
     try {
-        // Ambil query params
         const {
             page = '1',
             pageSize = '10',
@@ -80,11 +74,9 @@ export async function getPropertiesFilter(req: Request, res: Response) {
             maxPrice = '',
         } = req.query;
 
-        // Convert to integer
         const pageNum = parseInt(page as string, 10) || 1;
         const pageSizeNum = parseInt(pageSize as string, 10) || 10;
 
-        // Panggil service
         const { totalItems, properties } = await getProperties({
             page: pageNum,
             pageSize: pageSizeNum,
@@ -95,7 +87,6 @@ export async function getPropertiesFilter(req: Request, res: Response) {
             maxPrice: maxPrice as string,
         });
 
-        // Kirimkan hasil ke klien (bersama info paging)
         return res.json({
             currentPage: pageNum,
             pageSize: pageSizeNum,

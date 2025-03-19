@@ -12,7 +12,7 @@ const router = express.Router();
 
 router.post("/", VerifyToken, AdminGuard, createPeakSeasonRate);
 router.put("/:peakSeasonId", VerifyToken, AdminGuard, updatePeakSeasonRate);
-router.delete("/:peakSeasonId", VerifyToken, AdminGuard, deletePeakSeasonRate);
+router.delete("/:peakSeasonId/delete", VerifyToken, AdminGuard, deletePeakSeasonRate);
 router.get("/", VerifyToken, AdminGuard, getTenantPeakSeasons);
 
 export default router;

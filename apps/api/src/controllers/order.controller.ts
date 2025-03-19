@@ -1,14 +1,14 @@
 import { Request, Response } from "express";
 import prisma from "@/prisma";
 
-// ✅ API untuk Fetch Booking + Bukti Pembayaran
+
 export const getBookingsWithProof = async (req: Request, res: Response) => {
     try {
         const bookings = await prisma.booking.findMany({
             include: {
                 user: { select: { name: true, email: true } },
                 room: { include: { property: { select: { name: true } } } },
-                paymentProof: { select: { proofUrl: true } }, // ✅ Ambil bukti pembayaran
+                paymentProof: { select: { proofUrl: true } }, 
             },
         });
 
@@ -19,7 +19,7 @@ export const getBookingsWithProof = async (req: Request, res: Response) => {
     }
 };
 
-// ✅ API untuk Update Status Booking
+
 export const updateBookingStatus = async (req: Request, res: Response) => {
     try {
         const { bookingId } = req.params;

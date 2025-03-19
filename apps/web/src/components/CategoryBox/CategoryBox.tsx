@@ -19,9 +19,9 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({
     const params = useSearchParams();
 
     const handleClick = useCallback(() => {
-        let currentQuery = {}; //empty query
+        let currentQuery = {}; 
 
-        //look at the current params
+
         if (params) {
             currentQuery = qs.parse(params.toString());
         }
@@ -31,12 +31,12 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({
             category: label
         }
 
-        //reset category
+
         if (params?.get('category') === label) {
             delete updatedQuery.category;
         }
 
-        //generate url with newest query
+
         const url = qs.stringifyUrl({
             url: '/',
             query: updatedQuery
@@ -44,7 +44,7 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({
 
         router.push(url);
     }, [label, params, router]);
-    //after clicked , query will shown in url params query
+
 
     return (
         <div

@@ -14,19 +14,16 @@ const StepRooms2: React.FC<StepRoomsProps> = ({ errors, touched }) => {
         rooms: { name: string; price: number; maxGuests: number }[];
     }>();
 
-    // ✅ Pastikan ada minimal 1 kamar saat masuk step
     useEffect(() => {
         if (values.rooms.length === 0) {
             setFieldValue("rooms", [{ name: "", price: 0, maxGuests: 1 }]);
         }
     }, [values.rooms, setFieldValue]);
 
-    // ✅ Tambahkan Room Baru
     const addRoom = () => {
         setFieldValue("rooms", [...values.rooms, { name: "", price: 0, maxGuests: 1 }]);
     };
 
-    // ✅ Hapus Room
     const removeRoom = (index: number) => {
         const updatedRooms = [...values.rooms];
         updatedRooms.splice(index, 1);

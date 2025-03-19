@@ -22,7 +22,6 @@ async function updateRoleToOrganizer(req: Request, res: Response) {
             return;
         }
 
-        // Perbarui role pengguna
         await prisma.user.update({
             where: { id: userId },
             data: { role: "TENANT" }

@@ -17,7 +17,6 @@ export const forgotPassword = async (req: Request, res: Response) => {
             return res.status(400).json({ message: "Email tidak ditemukan" });
         }
 
-
         const resetToken = crypto.randomBytes(32).toString("hex");
         const expiresAt = new Date(Date.now() + 3600000);
 

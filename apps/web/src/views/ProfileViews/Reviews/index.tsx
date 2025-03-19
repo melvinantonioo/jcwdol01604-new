@@ -24,7 +24,6 @@ const UserReviews = () => {
             try {
                 setLoading(true);
                 const response = await axiosInstance.get("/api/reviews/user");
-                console.log("📢 User Reviews Data:", response.data);
                 setReviews(response.data);
             } catch (error) {
                 console.error("❌ Error fetching user reviews:", error);

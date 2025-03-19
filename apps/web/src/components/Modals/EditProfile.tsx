@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import Modal from "@/components/Modals/Modal";
-import Button from "@/utils/Button";
 import axiosInstance from "@/lib/AxiosInstance";
 import Swal from "sweetalert2";
 

@@ -22,25 +22,21 @@ const FilterModal = () => {
         minPrice: "",
         maxPrice: "",
         category: "",
-        sort: "", // 'priceAsc' atau 'priceDesc'
+        sort: "", 
     };
 
-    // Ketika form disubmit
     function handleFormikSubmit(values: typeof initialValues) {
         const { name, minPrice, maxPrice, category, sort } = values;
 
-        // Bikin query param
         const query = new URLSearchParams();
         if (name) query.set("name", name);
         if (minPrice) query.set("minPrice", minPrice);
         if (maxPrice) query.set("maxPrice", maxPrice);
-        if (category) query.set("categoryId", category); // pakai 'categoryId' di URL
+        if (category) query.set("categoryId", category); 
         if (sort) query.set("sort", sort);
 
-        // Redirect ke /search
         router.push(`/search?${query.toString()}`);
 
-        // Tutup modal
         filterModal.onClose();
     }
 
@@ -55,8 +51,6 @@ const FilterModal = () => {
                     <Modal
                         isOpen={filterModal.isOpen}
                         onClose={filterModal.onClose}
-                        // Modal ini punya prop onSubmit, kita pancing agar memanggil handleSubmit-nya Formik
-                        // Caranya, kita panggil handleSubmit() di sini
                         onSubmit={handleSubmit as any}
                         title="Filter"
                         actionLabel="Terapkan"

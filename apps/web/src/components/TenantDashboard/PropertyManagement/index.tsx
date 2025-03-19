@@ -79,15 +79,20 @@ const PropertyManagement = () => {
     };
 
     const handleModalSubmit = async () => {
+        if (!selectedProperty) return;
+
         try {
-            await axiosInstance.put(`/api/dashboard/${selectedProperty?.id}/update`, {
-                name: selectedProperty?.name,
-                description: selectedProperty?.description,
+            await axiosInstance.put(`/api/dashboard/${selectedProperty.id}/update`, {
+                name: editData.name, // ✅ Gunakan editData
+                description: editData.description, // ✅ Gunakan editData
             });
+
+            Swal.fire("Berhasil", "Property berhasil diperbarui", "success");
+
             setIsModalOpen(false);
             setSelectedProperty(null);
-            fetchProperties();
-            Swal.fire("Berhasil", "Property berhasil diperbarui", "success");
+
+            fetchProperties(); // ✅ Refetch data untuk update tampilan
         } catch (error) {
             console.error(error);
             Swal.fire("Error", "Gagal memperbarui property", "error");

@@ -16,7 +16,6 @@ export const bookRoom = async (req: Request, res: Response) => {
             return res.status(400).json({ message: "Tanggal check-out harus setelah check-in" });
         }
 
-        // Cek apakah kamar tersedia di rentang tanggal yang diminta
         const availability = await prisma.roomAvailability.findMany({
             where: {
                 roomId: roomId,
@@ -31,7 +30,6 @@ export const bookRoom = async (req: Request, res: Response) => {
             return res.status(400).json({ message: "Kamar tidak tersedia di tanggal yang dipilih" });
         }
 
-        // Ambil harga kamar
         const room = await prisma.room.findUnique({ where: { id: roomId } });
 
         if (!room) {
@@ -40,7 +38,6 @@ export const bookRoom = async (req: Request, res: Response) => {
 
         const totalPrice = room.price * daysRequested;
 
-        // Buat booking baru dengan status "WAITING_PAYMENT"
         const booking = await prisma.booking.create({
             data: {
                 userId: userId,

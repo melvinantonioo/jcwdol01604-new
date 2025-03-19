@@ -35,7 +35,6 @@ export const getProfile = async (req: Request, res: Response) => {
     }
 };
 
-// ✅ Fetch Daftar Booking User
 export const getMyBookings = async (req: Request, res: Response) => {
     try {
         const { id: userId } = req.user as { id: number };
@@ -77,17 +76,16 @@ export const updateProfile = async (req: Request, res: Response) => {
         let emailVerificationToken;
         let emailUpdateData = {}; 
 
-        // **Cek apakah email berubah**
         if (email !== currentUser.email) {
             emailVerificationToken = crypto.randomBytes(32).toString("hex");
 
             emailUpdateData = {
-                pendingEmail: email, // Simpan di kolom terpisah
+                pendingEmail: email, 
                 emailVerificationToken,
-                emailVerified: false, // Reset status verifikasi
+                emailVerified: false, 
             };
 
-            // **Kirim email verifikasi**
+
             const templatePath = path.join(__dirname, "../templates/", "register.hbs");
             const templateSource = fs.readFileSync(templatePath, "utf-8");
             const compiledTemplate = Handlebars.compile(templateSource);
@@ -107,13 +105,13 @@ export const updateProfile = async (req: Request, res: Response) => {
             });
         }
 
-        // **Update user di database**
+
         const updatedUser = await prisma.user.update({
             where: { id: userId },
             data: {
                 name,
                 ...(password && { password: hashedPassword }),
-                ...emailUpdateData, // Update email jika berubah
+                ...emailUpdateData, 
             },
         });
 
@@ -137,28 +135,24 @@ export const updateEmail = async (req: Request, res: Response) => {
             return res.status(400).json({ message: "Email baru wajib diisi" });
         }
 
-        // ✅ Cek apakah email sudah digunakan
         const existingUser = await prisma.user.findUnique({ where: { email } });
         if (existingUser) {
             return res.status(400).json({ message: "Email sudah digunakan" });
         }
 
-        // ✅ Buat token verifikasi baru
         const emailVerificationToken = crypto.randomBytes(32).toString("hex");
-        const emailVerificationExpires = new Date(Date.now() + 2 * 60 * 60 * 1000); // 2 jam kedaluwarsa
+        const emailVerificationExpires = new Date(Date.now() + 2 * 60 * 60 * 1000); 
 
-        // ✅ Update email & status verifikasi
         await prisma.user.update({
             where: { id: userId },
             data: {
                 email,
-                emailVerified: false, // Harus diverifikasi lagi
+                emailVerified: false, 
                 emailVerificationToken,
                 emailVerificationExpires,
             },
         });
 
-        // ✅ Kirim email verifikasi ulang
         const verificationLink = `${process.env.BASE_WEB_URL}/verify-email?token=${emailVerificationToken}`;
 
         await transporter.sendMail({

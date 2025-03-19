@@ -9,7 +9,7 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
-
+//pass supabase Lysrf6d31SVtz81R 
 enum Role {
   USER
   TENANT
@@ -97,7 +97,7 @@ model RoomAvailability {
   room        Room       @relation(fields: [roomId], references: [id])
 }
 
-// Model PeakSeasonRate
+
 model PeakSeasonRate {
   id                 Int       @id @default(autoincrement())
   roomId             Int

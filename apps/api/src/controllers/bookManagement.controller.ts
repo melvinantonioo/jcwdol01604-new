@@ -16,7 +16,6 @@ export const getTenantBookings = async (req: Request, res: Response) => {
             },
         };
 
-        // Filter berdasarkan nama user atau email
         if (search) {
             whereClause.user = {
                 OR: [
@@ -26,7 +25,6 @@ export const getTenantBookings = async (req: Request, res: Response) => {
             };
         }
 
-        // Filter berdasarkan rentang tanggal booking
         if (dateRange) {
             const startDate = new Date(dateRange as string);
             whereClause.startDate = { gte: startDate };
@@ -69,7 +67,7 @@ export const getUserBookings = async (req: Request, res: Response) => {
             where: { userId },
             include: {
                 room: {
-                    include: { property: true }, // Sertakan properti
+                    include: { property: true }, 
                 },
                 paymentProof: true,
             },

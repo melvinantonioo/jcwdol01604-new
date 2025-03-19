@@ -29,7 +29,7 @@ const Modal: React.FC<ModalProps> = ({
     disabled,
     secondaryAction,
     secondaryActionLabel,
-    children, // ✅ Gunakan children
+    children,
 }) => {
     const [showModal, setShowModal] = useState(isOpen);
 

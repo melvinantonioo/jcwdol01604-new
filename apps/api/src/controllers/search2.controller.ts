@@ -40,20 +40,18 @@ export const searchAlternate2 = async (req: Request, res: Response) => {
         } : {};
 
 
-        // ✅ Filter Ketersediaan Kamar (Hindari tabrakan dengan booking lain)
         const availabilityFilter = startDate && endDate ? {
             bookings: {
                 none: {
                     AND: [
                         { startDate: { lt: new Date(endDate as string) } },
                         { endDate: { gt: new Date(startDate as string) } },
-                        { status: { not: "CANCELLED" } },
+                        { status: { not: "CANCELLED" } }, 
                     ],
                 },
             },
         } : {};
 
-        // ✅ Filter harga hanya jika ada input dari user
         const priceFilter = minPriceNum !== undefined || maxPriceNum !== undefined ? {
             price: {
                 ...(minPriceNum !== undefined ? { gte: minPriceNum } : {}),
@@ -61,7 +59,6 @@ export const searchAlternate2 = async (req: Request, res: Response) => {
             },
         } : {};
 
-        // ✅ Pastikan `rooms` termasuk dalam `include`
         const properties = await prisma.property.findMany({
             where: whereClause,
             include: {
@@ -74,9 +71,6 @@ export const searchAlternate2 = async (req: Request, res: Response) => {
             take: sizeNum,
         });
 
-        console.log("🔎 Properties ditemukan sebelum filtering:", JSON.stringify(properties, null, 2));
-
-        // ✅ Definisikan tipe untuk hasil query Prisma
         type PropertyWithRooms = typeof properties[number] & {
             rooms: {
                 price: number;
@@ -87,7 +81,6 @@ export const searchAlternate2 = async (req: Request, res: Response) => {
             }[];
         };
 
-        // ✅ Hitung Harga Termasuk Peak Season
         let results = (properties as PropertyWithRooms[]).map((prop) => {
             if (!prop.rooms || prop.rooms.length === 0) {
                 return { ...prop, lowestRoomPrice: prop.basePrice };
@@ -108,7 +101,6 @@ export const searchAlternate2 = async (req: Request, res: Response) => {
             return { ...prop, lowestRoomPrice };
         });
 
-        console.log("✅ Hasil pencarian dikirim ke frontend:", results);
 
         if (sort === "price_asc") {
             results.sort((a, b) => a.lowestRoomPrice - b.lowestRoomPrice);

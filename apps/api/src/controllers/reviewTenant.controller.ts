@@ -10,7 +10,7 @@ export const getTenantReviews = async (req: Request, res: Response) => {
             return res.status(403).json({ message: "Akses ditolak" });
         }
 
-        console.log("📢 Tenant ID:", tenantId); 
+        console.log("Tenant ID:", tenantId); 
 
         const properties = await prisma.property.findMany({
             where: { tenantId },

@@ -15,17 +15,15 @@ export const searchQueryUpdate = async (req: Request, res: Response) => {
             pageSize = "10",
         } = req.query;
 
-        // Konversi parameter
+
         const pageNum = parseInt(page as string, 10) || 1;
         const sizeNum = parseInt(pageSize as string, 10) || 10;
         const catIdNum = categoryId ? parseInt(categoryId as string, 10) : undefined;
         const minPriceNum = minPrice ? parseFloat(minPrice as string) : undefined;
         const maxPriceNum = maxPrice ? parseFloat(maxPrice as string) : undefined;
 
-        // whereClause dasar
         const whereClause: any = { isDeleted: false };
 
-        // Filter lokasi (opsional)
         if (location) {
             whereClause.location = {
                 contains: location as string,
@@ -33,12 +31,10 @@ export const searchQueryUpdate = async (req: Request, res: Response) => {
             };
         }
 
-        // Filter kategori (opsional)
         if (catIdNum) {
             whereClause.categoryId = catIdNum;
         }
 
-        // Filter rentang harga (opsional)
         if (minPriceNum !== undefined || maxPriceNum !== undefined) {
             whereClause.rooms = {
                 some: {
@@ -50,14 +46,13 @@ export const searchQueryUpdate = async (req: Request, res: Response) => {
             };
         }
 
-        // **Filter Berdasarkan Ketersediaan Room & Booking**
         if (startDate && endDate) {
             const start = new Date(startDate as string);
             const end = new Date(endDate as string);
 
             whereClause.rooms = {
                 some: {
-                    // **Cek booking agar tidak menampilkan kamar yang sudah dibooking**
+                    
                     bookings: {
                         none: {
                             AND: [

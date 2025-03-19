@@ -22,27 +22,7 @@ interface OrderCardProps {
 
 const ProfileOrderCard2: React.FC<OrderCardProps> = ({ booking }) => {
     const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
-    const [hasReviewed, setHasReviewed] = useState(false); // ✅ State untuk cek apakah sudah direview
-
-    // useEffect(() => {
-    //     console.log("Booking Data:", booking); // 🔍 Debugging
-
-    //     const checkReviewStatus = async () => {
-    //         try {
-    //             if (!booking?.room?.id) {
-    //                 console.warn("Room ID is missing!", booking);
-    //                 return;
-    //             }
-
-    //             const { data } = await axiosInstance.get(`/api/reviews/room/${booking.room.id}`);
-    //             setHasReviewed(data.hasReviewed);
-    //         } catch (error) {
-    //             console.error("Error checking review status:", error);
-    //         }
-    //     };
-
-    //     checkReviewStatus();
-    // }, [booking]);
+    const [hasReviewed, setHasReviewed] = useState(false); 
 
     const handleUpdateStatus = async (status: string) => {
         try {
@@ -86,7 +66,7 @@ const ProfileOrderCard2: React.FC<OrderCardProps> = ({ booking }) => {
         <div className="p-4 border rounded-lg shadow-md hover:shadow-lg">
             <h2 className="text-lg font-bold">{booking.room.property.name}</h2>
             <p>Room: {booking.room.name}</p>
-            {/* <p>Guest:  ({booking.user.email})</p> */}
+
             <p>Check-in: {new Date(booking.startDate).toLocaleDateString()}</p>
             <p>Check-out: {new Date(booking.endDate).toLocaleDateString()}</p>
             <p>Status: <span className={`font-bold ${booking.status === "WAITING_PAYMENT" ? "text-orange-500" : "text-green-500"}`}>{booking.status}</span></p>
@@ -95,15 +75,14 @@ const ProfileOrderCard2: React.FC<OrderCardProps> = ({ booking }) => {
             {booking.status === "WAITING_PAYMENT" && (
                 <div className="mt-2 flex gap-2">
                     <button onClick={() => handleUpdateStatus("PAYMENT_CONFIRMED")} className="bg-green-500 text-white px-4 py-2 rounded">
-                        Accept
+                        Pay
                     </button>
                     <button onClick={() => handleUpdateStatus("CANCELLED")} className="bg-red-500 text-white px-4 py-2 rounded">
-                        Reject
+                        Cancel
                     </button>
                 </div>
             )}
 
-            {/* TOMBOL REVIEW */}
             {booking.status === "PAYMENT_CONFIRMED" && (
                 <button
                     onClick={() => setIsReviewModalOpen(true)}
@@ -114,7 +93,6 @@ const ProfileOrderCard2: React.FC<OrderCardProps> = ({ booking }) => {
                 </button>
             )}
 
-            {/* MODAL FORM REVIEW */}
             <Modal
                 isOpen={isReviewModalOpen}
                 onClose={() => setIsReviewModalOpen(false)}

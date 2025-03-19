@@ -1,5 +1,3 @@
-import Navbar from '@/components/TenantDashboard/TenantNavbar';
-import Sidebar from '@/components/TenantDashboard/SideBar';
 import { ReactNode } from 'react';
 import ProfileSidebar from '@/components/Profile/ProfileSidebar';
 import ProfileNavbar from '@/components/Profile/ProfileNavbar';

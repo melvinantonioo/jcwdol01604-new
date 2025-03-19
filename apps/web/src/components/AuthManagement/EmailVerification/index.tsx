@@ -22,7 +22,7 @@ const VerifyEmail = () => {
                     );
                 })
                 .catch((err) => {
-                    console.log("Error response:", err.response?.data || err); // Debugging error
+                    console.log("Error response:", err.response?.data || err); 
                     setMessage("Verifikasi gagal atau token tidak valid.");
                     Swal.fire("Error!", "Verifikasi gagal.", "error");
                 });

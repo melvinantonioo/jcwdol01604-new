@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getAllProperties, getPropertiesByCategory } from '@/controllers/get-property.controller';
+import { getAllProperties, getAllProperties2, getPropertiesByCategory } from '@/controllers/get-property.controller';
 import { getPropertyDetails, getPropertyDetailsBySlug } from '@/controllers/get.propertyDetail.controller';
 import { AdminGuard, VerifyToken } from '@/middlewares/log.niddleware';
 import { upload } from "@/utils/upload.cloudinary";

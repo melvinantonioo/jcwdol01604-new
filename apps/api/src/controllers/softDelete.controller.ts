@@ -4,7 +4,7 @@ import { User } from "@prisma/client";
 
 export const softDeleteProperty = async (req: Request, res: Response) => {
     try {
-        const { id: tenantId } = req.user as User; // Tenant ID dari auth middleware
+        const { id: tenantId } = req.user as User; 
         const { propertyId } = req.params;
 
         const property = await prisma.property.findUnique({
@@ -19,7 +19,6 @@ export const softDeleteProperty = async (req: Request, res: Response) => {
             return res.status(403).json({ message: "Akses ditolak" });
         }
 
-        // Soft delete properti dengan update isDeleted & deletedAt
         await prisma.property.update({
             where: { id: parseInt(propertyId) },
             data: {

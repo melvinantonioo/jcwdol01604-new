@@ -29,8 +29,8 @@ const StepReview: React.FC<StepReviewProps> = ({ values }) => {
                         </li>
                     ))}
                 </ul>
-                {/* <p><strong>Jumlah Kamar Mandi:</strong> {values.bathrooms}</p>
-                <p><strong>Tamu Maksimal:</strong> {values.maxGuests}</p> */}
+                {/* <p><strong>Jumlah Kamar Mandi:</strong> {values.bathrooms}</p> */}
+                <p><strong>Tamu Maksimal:</strong> {values.maxGuests}</p>
                 <p><strong>Harga Dasar:</strong> {values.basePrice}</p>
                 <p><strong>Foto:</strong> {values.images.length} file(s)</p>
             </div>

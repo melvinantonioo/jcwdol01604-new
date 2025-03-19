@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import prisma from '@/prisma';
 import path from 'path';
 import Handlebars from 'handlebars';
-import fs from 'fs'; // File system
+import fs from 'fs'; 
 import { transporter } from '../lib/mail';
 import crypto from 'crypto'
 import { User } from '@/custom';
@@ -26,7 +26,7 @@ export const registerUser = async (req: Request, res: Response) => {
         const hashedPassword = await bcrypt.hash(password, salt);
 
         const emailVerificationToken = crypto.randomBytes(32).toString("hex");
-        const emailVerificationExpires = new Date(Date.now() + 2 * 60 * 60 * 1000); // Expired 2 jam
+        const emailVerificationExpires = new Date(Date.now() + 2 * 60 * 60 * 1000);
 
         const newUser = await prisma.user.create({
             data: {
@@ -90,15 +90,12 @@ export const loginUser = async (req: Request, res: Response) => {
             return res.status(400).json({ message: 'Invalid email or password' });
         }
 
-
-        // Cek password
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             res.status(400).json({ message: 'Invalid email or password' });
             return;
         }
 
-        // Generate JWT - hanya berisi data penting
         const token = jwt.sign(
             {
                 id: user.id,
@@ -113,7 +110,7 @@ export const loginUser = async (req: Request, res: Response) => {
 
         res.status(200)
             .cookie("access_token", token, {
-                maxAge: 3600000 // 1 jam
+                maxAge: 3600000 
             })
             .json({
                 message: 'Login successful',

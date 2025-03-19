@@ -29,7 +29,6 @@ export default function SearchResult() {
             try {
                 setLoading(true);
 
-                // Ambil param2 pencarian
                 const name = searchParams.get("name");
                 const location = searchParams.get("location");
                 const startDate = searchParams.get("startDate");
@@ -41,7 +40,6 @@ export default function SearchResult() {
 
                 console.log("Query Params: ", { location, startDate, endDate, categoryId, sort, minPrice, maxPrice });
 
-                // Bentuk query
                 const query = new URLSearchParams();
                 if (name) query.set("name", name);
                 if (location) query.set("location", location);
@@ -49,8 +47,6 @@ export default function SearchResult() {
                 if (endDate) query.set("endDate", endDate);
                 if (categoryId) query.set("categoryId", categoryId);
                 if (sort) query.set("sort", sort);
-                // if (minPrice) query.set("minPrice", minPrice);
-                // if (maxPrice) query.set("maxPrice", maxPrice);
                 if (minPrice) query.set("minPrice", Number(minPrice).toString());
                 if (maxPrice) query.set("maxPrice", Number(maxPrice).toString());
                 query.set("page", currentPage.toString());

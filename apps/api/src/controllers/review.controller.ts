@@ -4,7 +4,6 @@ import { User } from "@/custom";
 
 export const getReviewsByProperty = async (req: Request, res: Response) => {
     try {
-        // console.log("📌 Params received:", req.params); // 🔍 Debug params
         const { propertyId } = req.params; 
 
         if (!propertyId) {
@@ -43,9 +42,8 @@ export const createReview = async (req: Request, res: Response) => {
             return res.status(401).json({ message: "Unauthorized" });
         }
 
-        const userId = req.user.id; // ✅ Sekarang pasti number
+        const userId = req.user.id; 
 
-        // ✅ Cek apakah booking valid
         const booking = await prisma.booking.findUnique({
             where: { id: bookingId },
             include: { room: { include: { property: true } } },
@@ -55,7 +53,6 @@ export const createReview = async (req: Request, res: Response) => {
             return res.status(403).json({ message: "Booking tidak valid" });
         }
 
-        // ✅ Pastikan user hanya bisa review 1x per booking
         const existingReview = await prisma.review.findFirst({
             where: { userId, propertyId: booking.room.property.id },
         });
@@ -64,7 +61,6 @@ export const createReview = async (req: Request, res: Response) => {
             return res.status(400).json({ message: "Anda sudah memberikan review untuk booking ini" });
         }
 
-        // ✅ Simpan review ke database
         const newReview = await prisma.review.create({
             data: {
                 userId,
@@ -129,7 +125,7 @@ export const getUserReviews = async (req: Request, res: Response) => {
             orderBy: { createdAt: "desc" }, 
         });
 
-        console.log("✅ Reviews ditemukan:", reviews);
+        console.log(" Reviews ditemukan:", reviews);
 
         return res.status(200).json(reviews);
     } catch (error) {

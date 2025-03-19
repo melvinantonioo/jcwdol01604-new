@@ -27,8 +27,6 @@ const StepLocation: React.FC<StepLocationProps> = ({ errors, touched }) => {
                 onChange={(value) => }
             /> */}
 
-            {/* Misalnya kita pakai input text biasa untuk location, 
-          atau kita simpan data CountrySelect sebagai string */}
             <div className="flex flex-col gap-2">
                 <label>Lokasi (Negara/Kota)</label>
                 <input

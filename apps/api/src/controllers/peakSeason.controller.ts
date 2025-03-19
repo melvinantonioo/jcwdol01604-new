@@ -41,7 +41,7 @@ export const updatePeakSeasonRate = async (req: Request, res: Response) => {
         const { startDate, endDate, priceAdjustment, percentageAdjustment } = req.body;
         const { id: tenantId } = req.user as { id: number };
 
-        // Pastikan Peak Season adalah milik Tenant
+       
         const peakSeason = await prisma.peakSeasonRate.findFirst({
             where: {
                 id: Number(peakSeasonId),
@@ -76,7 +76,7 @@ export const deletePeakSeasonRate = async (req: Request, res: Response) => {
         const { peakSeasonId } = req.params;
         const { id: tenantId } = req.user as { id: number };
 
-        // Pastikan Peak Season adalah milik Tenant
+        
         const peakSeason = await prisma.peakSeasonRate.findFirst({
             where: {
                 id: Number(peakSeasonId),

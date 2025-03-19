@@ -16,6 +16,7 @@ import { fetchGeolocation } from "@/utils/geolocation";
 import CheckPricing from "@/components/Pricing";
 import FacilityAndRules from "@/components/Properties/Facility";
 import ReviewsList from "@/utils/Review/ReviewList";
+import BookingModalFix from "@/components/Modals/BookingModalFix";
 
 const Map2 = dynamic(() => import("@/utils/Map2"), {
     ssr: false,         
@@ -119,11 +120,11 @@ const ListingDetail = () => {
 
                             {geoLocation ? <Map2 center={geoLocation} /> : <p className="text-gray-500">📍 Lokasi belum tersedia</p>}
 
-                            {/* ✅ Komponen Reviews */}
+
                             <h2 className="text-xl font-semibold mt-6">Review & Rating</h2>
                             <ReviewsList propertyId={Number(property.id)} />
 
-                            {/* BUTTON BOOKING */}
+
                             <div className="flex justify-center mt-4">
                                 <Button
                                     label="Book Now"
@@ -133,9 +134,9 @@ const ListingDetail = () => {
                         </div>
                     </div>
                 </Container>
-                {/* MODAL BOOKING */}
+
                 {property && (
-                    <BookingModal
+                    <BookingModalFix
                         isOpen={isBookingModalOpen}
                         onClose={() => setIsBookingModalOpen(false)}
                         property={property}

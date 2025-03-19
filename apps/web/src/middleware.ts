@@ -15,7 +15,7 @@ export default async function middleware(req: NextRequest) {
         );
 
 
-        const token = req.cookies.get("access_token")?.value || ""; //gunakan ini fixed
+        const token = req.cookies.get("access_token")?.value || ""; 
 
 
         if (isProtected && !token) {
@@ -30,7 +30,7 @@ export default async function middleware(req: NextRequest) {
             req.nextUrl.pathname.startsWith("/admin") &&
             user.role.toUpperCase() !== "TENANT"
         ) {
-            return NextResponse.redirect(new URL("/update-role", req.nextUrl)); //try 
+            return NextResponse.redirect(new URL("/update-role", req.nextUrl)); 
         }
         console.log("Middleware berjalan untuk:", req.nextUrl.pathname);
 

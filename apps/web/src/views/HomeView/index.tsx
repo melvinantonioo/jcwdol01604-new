@@ -1,5 +1,4 @@
 "use client";
-import Footer from '@/components/Footer';
 import PropertyCard from '@/components/Properties/PropertyCard';
 import ClientCompopnent from '@/layouts/ClientComponent';
 import Container from '@/layouts/Container';
@@ -23,7 +22,6 @@ interface Property {
     reviews?: { rating: number }[]; 
     slug: string;
 }
-
 
 export default function HomeViews() {
     const searchParams = useSearchParams();
@@ -50,9 +48,12 @@ export default function HomeViews() {
     const [totalPages, setTotalPages] = useState<number>(1);
 
     const bannerImages = [
-        '/Banner1.avif',
-        '/Banner2.avif',
-        '/Banner3.avif',
+        '/BannerRoom2.jpg',
+        '/BannerRoom4.jpg',
+    ];
+    const bannerImages2 = [
+        '/BannerRoom.jpg',
+        '/BannerRoom3.jpg',
     ];
 
     useEffect(() => {
@@ -91,6 +92,7 @@ export default function HomeViews() {
                 });
 
                 setProperties(response.data.properties || []);
+                console.log("data property HomePage", response.data.properties)
                 setTotalPages(response.data.totalPages);
             } catch (error) {
                 console.error("Error fetching properties:", error);
@@ -155,7 +157,7 @@ export default function HomeViews() {
                     </div>
                 )}
 
-                <div className="flex justify-center items-center gap-4 mt-6">
+                <div className="flex justify-center items-center gap-4 mt-6 pb-6">
                     <button
                         onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
                         disabled={page === 1}
@@ -176,7 +178,9 @@ export default function HomeViews() {
                         Next
                     </button>
                 </div>
-                {/* <Footer /> */}
+
+                <Carousel banners={bannerImages2} />
+
             </Container>
         </ClientCompopnent>
     )
