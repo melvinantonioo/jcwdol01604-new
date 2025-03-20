@@ -1,4 +1,3 @@
-// src/services/property.service.ts
 
 import { PrismaClient } from '@prisma/client';
 

@@ -3,7 +3,9 @@ import multer from "multer";
 // import cloudinary from "@/lib/cloudinary"; // Cloudinary Config
 import { v2 as cloudinaryV2 } from "cloudinary";
 import { Readable } from "stream";
-import prisma from "@/prisma";
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 cloudinaryV2.config({
     api_key: process.env.CLOUDINARY_API_KEY || "",
@@ -11,10 +13,9 @@ cloudinaryV2.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME || "",
 });
 
-// ✅ 1. Konfigurasi Multer untuk Simpan di Memori
+
 export const upload = multer({ storage: multer.memoryStorage() });
 
-// ✅ 2. Fungsi Upload ke Cloudinary
 export const uploadToCloudinary = (fileBuffer: Buffer, folder = "profile_pictures"): Promise<string> => {
     return new Promise((resolve, reject) => {
         const stream = cloudinaryV2.uploader.upload_stream({ folder }, (error, result) => {

@@ -4,20 +4,20 @@ import ErrorMiddleware from "./middlewares/error.middleware";
 import { PORT as port, BASE_WEB_URL } from "./config";
 import cors from "cors";
 
-import propertyRoutes from '@/routers/property.routes';
-import filterRoutes from "@/routers/search.routes";
-import updateRole from '@/routers/update.role.routes';
-import uploadRoutes from '@/routers/upload.routes';
-import dashboardRoutes from '@/routers/dashboard.route';
-import bookingRoutes from '@/routers/booking.routes';
-import peakSeasonRoutes from '@/routers/peakSeason.routes';
-import profileRoutes from '@/routers/profile.routes';
-import pricingRoutes from '@/routers/pricing.routes';
-import roomRoutes from '@/routers/room.routes';
-import orderRoutes from "@/routers/order.routes";
+import propertyRoutes from '../routers/property.routes';
+import filterRoutes from "../routers/search.routes";
+import updateRole from '../routers/update.role.routes';
+import uploadRoutes from '../routers/upload.routes';
+import dashboardRoutes from '../routers/dashboard.route';
+import bookingRoutes from '../routers/booking.routes';
+import peakSeasonRoutes from '../routers/peakSeason.routes';
+import profileRoutes from '../routers/profile.routes';
+import pricingRoutes from '../routers/pricing.routes';
+import roomRoutes from '../routers/room.routes';
+import orderRoutes from "../routers/order.routes";
 
-import googleLoginRoute from '@/routers/social.routes';
-import reviewRoutes from "@/routers/review.routes";
+import googleLoginRoute from '../routers/social.routes';
+import reviewRoutes from "../routers/review.routes";
 
 
 import dotenv from "dotenv";
@@ -27,12 +27,6 @@ const PORT = Number(port) || 8000;
 
 const app: Application = express();
 
-// app.use(
-//   cors({
-//     origin: BASE_WEB_URL || "http://localhost:3000",
-//     credentials: true,
-//   })
-// );
 
 app.use(
   cors({

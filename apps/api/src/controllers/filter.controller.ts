@@ -1,7 +1,10 @@
 import { Request, Response } from "express";
-import prisma from "@/prisma";
+// import prisma from "@/prisma";
 import { Prisma } from "@prisma/client";
-import { getProperties } from "@/services/property.service";
+import { getProperties } from "../services/property.service";
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 
 export const searchProperties = async (req: Request, res: Response) => {

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { cloudinaryUpload } from "@/utils/Cloudinary1";
+import { cloudinaryUpload } from "../utils/Cloudinary1";
 import multer from "multer";
 
 

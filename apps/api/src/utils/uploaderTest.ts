@@ -4,7 +4,7 @@ import multer from "multer";
 export const SingleUploaderTest = () => {
     const maxSize = 1 * 1024 * 1024; // 1MB limit
 
-    const storage = multer.memoryStorage(); // ✅ Simpan di memori, bukan di disk
+    const storage = multer.memoryStorage(); 
 
     return multer({
         storage: storage,

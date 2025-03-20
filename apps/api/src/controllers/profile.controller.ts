@@ -1,11 +1,14 @@
 import { Request, Response } from "express";
-import prisma from "@/prisma";
+// import prisma from "@/prisma";
 import bcrypt from 'bcrypt';
 import path from 'path';
 import Handlebars from 'handlebars';
 import fs from 'fs';
 import { transporter } from '../lib/mail';
-import crypto from 'crypto'
+import crypto from 'crypto';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 export const getProfile = async (req: Request, res: Response) => {
     try {

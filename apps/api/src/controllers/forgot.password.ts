@@ -1,11 +1,14 @@
 import { Request, Response } from 'express';
 import crypto from 'crypto';
-import prisma from '@/prisma';
+// import prisma from '@/prisma';
 import { transporter } from '../lib/mail';
 import path from 'path';
 import Handlebars from 'handlebars';
 import fs from 'fs';
 import bcrypt from 'bcrypt';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 export const forgotPassword = async (req: Request, res: Response) => {
     const { email } = req.body;

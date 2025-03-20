@@ -1,6 +1,8 @@
 // src/controllers/propertyController.ts
 import { Request, Response } from 'express';
-import prisma from '@/prisma';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 export const getAllProperties = async (req: Request, res: Response): Promise<Response> => {
     try {

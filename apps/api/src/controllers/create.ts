@@ -1,5 +1,4 @@
 
-// src/controllers/propertyController.ts
 import { Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
 import slugify from 'slugify';

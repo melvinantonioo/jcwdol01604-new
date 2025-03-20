@@ -1,6 +1,9 @@
 import { Request, Response } from "express";
-import prisma from "@/prisma";
+// import prisma from "@/prisma";
 import { User } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 export const softDeleteProperty = async (req: Request, res: Response) => {
     try {
