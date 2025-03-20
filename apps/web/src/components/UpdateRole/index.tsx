@@ -3,25 +3,14 @@ import { useRouter } from "next/navigation";
 import axiosInstance from "@/lib/AxiosInstance";
 
 const UpdateRolePage: React.FC = () => {
-    let router: ReturnType<typeof useRouter> | undefined;
-
-    try {
-        router = useRouter(); // Pastikan router diinisialisasi
-    } catch (err) {
-        console.warn("Router is not mounted, using fallback navigation.");
-    }
+    const router = useRouter();
 
     const handleUpdateRole = async (): Promise<void> => {
         try {
             const response = await axiosInstance.post<{ message: string }>("/role/update-role");
             alert(response.data.message);
 
-            // Gunakan router jika tersedia, atau fallback ke window.location.href
-            if (router) {
-                router.push("/login");
-            } else {
-                window.location.href = "/admin";
-            }
+            router.push("/login");
         } catch (error: any) {
             console.error("Error updating role:", error);
             alert(error.response?.data?.message || "Gagal memperbarui role. Silakan coba lagi.");

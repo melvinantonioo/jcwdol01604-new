@@ -35,7 +35,7 @@ const StepReview: React.FC<StepReviewProps> = ({ values }) => {
                 <p><strong>Foto:</strong> {values.images.length} file(s)</p>
             </div>
             <div className="text-red-500">
-                *Pastikan semua data sudah benar sebelum menekan tombol "Simpan"
+                Pastikan semua data sudah benar sebelum menekan tombol Simpan
             </div>
         </div>
     );

@@ -14,7 +14,8 @@ interface SearchProperty {
     basePrice: number;
     rating?: number;
     imageUrl?: string;
-    lowestRoomPrice?: number; // Jika ingin menampilkan kalkulasi "lowestRoomPrice"
+    lowestRoomPrice?: number;
+    region: string;
 }
 
 export default function SearchResult() {
@@ -90,6 +91,7 @@ export default function SearchResult() {
                     slug={property.slug}
                     name={property.name}
                     location={property.location || ""}
+                    region={property.region || ""}
                     price={property.lowestRoomPrice || property.basePrice}
                     rating={property.rating || 0}
                     imageUrl={property.imageUrl || "/default.avif"}

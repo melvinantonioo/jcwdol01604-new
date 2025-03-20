@@ -20,7 +20,7 @@ const ReviewCard: React.FC<ReviewCardProps> = ({ review }) => {
                 <FaStar className="text-yellow-500" />
                 <span className="font-bold text-gray-800">{review.rating}/5</span>
             </div>
-            <p className="text-sm text-gray-600">"{review.comment}"</p>
+            <p className="text-sm text-gray-600">{review.comment}</p>
             <p className="text-xs text-gray-500 mt-2">
                 Oleh <span className="font-semibold">{review.user.name}</span> pada{" "}
                 {new Date(review.createdAt).toLocaleDateString()}

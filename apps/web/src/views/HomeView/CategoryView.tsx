@@ -12,10 +12,12 @@ interface Property {
     basePrice: number;
     rating: number;
     imageUrl: string;
+    region: string;
+    slug: string;
 }
 
 const CategoryPage = () => {
-    const { categoryId } = useParams(); // Mengambil categoryId dari URL
+    const { categoryId } = useParams(); 
     const parsedCategoryId = categoryId ? Number(categoryId) : null;
     const [properties, setProperties] = useState<Property[]>([]);
     const [loading, setLoading] = useState(true);
@@ -55,9 +57,11 @@ const CategoryPage = () => {
                             id={property.id}
                             name={property.name}
                             location={property.location}
+                            region={property.region}
                             price={property.basePrice}
                             rating={property.rating}
                             imageUrl={property.imageUrl}
+                            slug={property.slug}
                         />
                     ))}
                 </div>

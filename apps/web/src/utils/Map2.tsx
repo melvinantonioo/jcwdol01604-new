@@ -8,7 +8,7 @@ import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 
-// Prevent leaflet errors on SSR
+
 const isBrowser = typeof window !== 'undefined';
 
 if (isBrowser) {
@@ -22,10 +22,10 @@ if (isBrowser) {
 }
 
 interface MapProps {
-    center?: [number, number] | null; // ✅ Bisa null saat data belum ada
+    center?: [number, number] | null; 
 };
 
-// Komponen untuk update pusat peta saat `center` berubah
+
 const ChangeView: React.FC<{ center: [number, number] }> = ({ center }) => {
     const map = useMap();
     useEffect(() => {
@@ -41,7 +41,7 @@ const Map2: React.FC<MapProps> = ({ center }) => {
         setMounted(true);
     }, []);
 
-    if (!mounted) return null; // Hindari masalah render awal di SSR
+    if (!mounted) return null;
     if (!center) return <p className="text-center text-gray-500">📍 Lokasi belum tersedia</p>;
 
     const safeCenter: [number, number] = center ?? [0, 0];
