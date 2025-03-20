@@ -18,7 +18,6 @@ const HandleLogin = async (onAuthSuccess: (user: IUser | null) => void) => {
     try {
         const access_token = getCookie("access_token") as string
 
-
         if (access_token) {
             const user: IUser = jwtDecode(access_token); //bug
             setCookie("access_token", access_token);

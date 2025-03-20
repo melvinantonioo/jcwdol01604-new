@@ -114,9 +114,11 @@ export const loginUser = async (req: Request, res: Response) => {
         res.status(200)
             .cookie("access_token", token, {
                 maxAge: 3600000,
-                httpOnly: true,
+                httpOnly: false, 
                 secure: true,
                 sameSite: "none", 
+                domain: ".vercel.app", 
+                path: "/",
             })
             .json({
                 message: 'Login successful',

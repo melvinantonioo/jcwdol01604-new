@@ -9,6 +9,17 @@ export const authOptions: NextAuthOptions = {
             clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET!,
         }),
     ],
+    cookies: {
+        sessionToken: {
+            name: `__Secure-next-auth.session-token`,
+            options: {
+                httpOnly: true,
+                sameSite: "none",
+                secure: true, // true untuk domain HTTPS (Vercel)
+                path: "/",
+            },
+        },
+    },
     callbacks: {
         async signIn({ user, account, profile }) {
             console.log("🔍 Checking sign-in for user:", profile);
