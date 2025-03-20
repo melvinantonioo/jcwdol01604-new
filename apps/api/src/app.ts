@@ -28,19 +28,27 @@ const PORT = Number(port) || 8000;
 const app: Application = express();
 
 
+// app.use(
+//   cors({
+//     origin: (origin, callback) => {
+//       if (!origin || origin === BASE_WEB_URL || origin === "http://localhost:3000") {
+//         callback(null, true);
+//       } else {
+//         callback(new Error("CORS policy error: Origin not allowed"));
+//       }
+//     },
+//     credentials: true,
+//     methods: "GET,POST,PUT,DELETE,OPTIONS",
+//     allowedHeaders: "Content-Type,Authorization",
+//     preflightContinue: false,
+//   })
+// );
 app.use(
   cors({
-    origin: (origin, callback) => {
-      if (!origin || origin === BASE_WEB_URL || origin === "http://localhost:3000") {
-        callback(null, true);
-      } else {
-        callback(new Error("CORS policy error: Origin not allowed"));
-      }
-    },
+    origin: ["https://air-room-tau.vercel.app", "http://localhost:3000"], 
     credentials: true,
     methods: "GET,POST,PUT,DELETE,OPTIONS",
     allowedHeaders: "Content-Type,Authorization",
-    preflightContinue: false, 
   })
 );
 
