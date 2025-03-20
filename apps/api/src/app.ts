@@ -43,14 +43,22 @@ const app: Application = express();
 //     preflightContinue: false,
 //   })
 // );
+// app.use(
+//   cors({
+//     origin: ["https://air-room-tau.vercel.app", "http://localhost:3000"], 
+//     credentials: true,
+//     methods: "GET,POST,PUT,DELETE,OPTIONS",
+//     allowedHeaders: "Content-Type,Authorization",
+//   })
+// );
+
 app.use(
   cors({
-    origin: ["https://air-room-tau.vercel.app", "http://localhost:3000"], 
+    origin: BASE_WEB_URL || "http://localhost:3000",
     credentials: true,
-    methods: "GET,POST,PUT,DELETE,OPTIONS",
-    allowedHeaders: "Content-Type,Authorization",
   })
 );
+
 
 
 app.use(express.json());
