@@ -1,6 +1,6 @@
 import express from 'express';
 import { loginUser, registerUser, UpdateProfilePicture } from '../controllers/auth.controller';
-import { LoginValidation, RegisterValidation } from '@/middlewares/validation/auth.validation';
+import { LoginValidation, RegisterValidation } from '../middlewares/validation/auth.validation';
 import { verifyEmail } from '@/controllers/verify.email';
 import { forgotPassword, resetPassword } from '@/controllers/forgot.password';
 import { VerifyToken } from '@/middlewares/log.niddleware';
