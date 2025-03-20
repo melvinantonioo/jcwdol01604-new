@@ -1,13 +1,16 @@
 import { NextFunction, Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import prisma from '@/prisma';
+// import prisma from '@/prisma';
 import path from 'path';
 import Handlebars from 'handlebars';
 import fs from 'fs'; 
 import { transporter } from '../lib/mail';
 import crypto from 'crypto'
 import { User } from '@/custom';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 export const registerUser = async (req: Request, res: Response) => {
     const templatePath = path.join(__dirname, "../templates/", "register.hbs");
