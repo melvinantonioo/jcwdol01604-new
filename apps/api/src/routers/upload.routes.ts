@@ -1,6 +1,6 @@
 import express from "express";
 import { uploadImage } from "../controllers/imageUpload.controller";
-import { AdminGuard, VerifyToken } from "@/middlewares/log.niddleware";
+import { AdminGuard, VerifyToken } from "../middlewares/log.niddleware";
 
 const router = express.Router();
 

@@ -1,10 +1,10 @@
 import express from "express";
-import { createBooking, getBookingDetails } from "@/controllers/booking.controller";
+import { createBooking, getBookingDetails } from "../controllers/booking.controller";
 
-import { AdminGuard, VerifyToken } from "@/middlewares/log.niddleware";
-import { checkEmailVerified } from "@/middlewares/email.middleware";
-import { getTenantBookings, getUserBookings, updateBookingStatus } from "@/controllers/bookManagement.controller";
-import { checkRoomAvailability } from "@/controllers/roomChecker.controller";
+import { AdminGuard, VerifyToken } from "../middlewares/log.niddleware";
+import { checkEmailVerified } from "../middlewares/email.middleware";
+import { getTenantBookings, getUserBookings, updateBookingStatus } from "../controllers/bookManagement.controller";
+import { checkRoomAvailability } from "../controllers/roomChecker.controller";
 
 const router = express.Router();
 

@@ -1,9 +1,9 @@
-import { getMyBookings, getProfile, updateEmail, updateProfile } from "@/controllers/profile.controller";
-import { getProfileEmail, resendEmailVerification } from "@/controllers/verify.email";
-import { VerifyToken } from "@/middlewares/log.niddleware";
+import { getMyBookings, getProfile, updateEmail, updateProfile } from "../controllers/profile.controller";
+import { getProfileEmail, resendEmailVerification } from "../controllers/verify.email";
+import { VerifyToken } from "../middlewares/log.niddleware";
 
-import { upload, uploadProfilePicture } from "@/utils/upload.cloudinary";
-import { SingleUploaderTest } from "@/utils/uploaderTest";
+import { upload, uploadProfilePicture } from "../utils/upload.cloudinary";
+import { SingleUploaderTest } from "../utils/uploaderTest";
 import express from "express";
 
 const router = express.Router();

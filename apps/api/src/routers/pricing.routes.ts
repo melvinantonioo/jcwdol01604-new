@@ -1,4 +1,4 @@
-import { checkPropertyPricing } from "@/controllers/pricing.controller";
+import { checkPropertyPricing } from "../controllers/pricing.controller";
 import express from "express";
 
 const router = express.Router();

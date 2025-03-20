@@ -1,5 +1,5 @@
 import express from "express";
-import { registerGoogleUser } from "@/controllers/socialLogin.controller";
+import { registerGoogleUser } from "../controllers/socialLogin.controller";
 
 const router = express.Router();
 

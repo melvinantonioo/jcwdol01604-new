@@ -4,9 +4,9 @@ import {
     updatePeakSeasonRate,
     deletePeakSeasonRate,
     getTenantPeakSeasons,
-} from "@/controllers/peakSeason.controller";
+} from "../controllers/peakSeason.controller";
 
-import { AdminGuard, VerifyToken } from "@/middlewares/log.niddleware";
+import { AdminGuard, VerifyToken } from "../middlewares/log.niddleware";
 
 const router = express.Router();
 

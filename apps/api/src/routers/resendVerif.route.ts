@@ -1,6 +1,6 @@
 import express from "express";
-import { VerifyToken } from "@/middlewares/log.niddleware";
-import { resendEmailVerification } from "@/controllers/verify.email";
+import { VerifyToken } from "../middlewares/log.niddleware";
+import { resendEmailVerification } from "../controllers/verify.email";
 
 const router = express.Router();
 

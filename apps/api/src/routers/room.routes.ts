@@ -1,6 +1,6 @@
 // import { deleteRoom, updateRoom } from '@/controllers/dashboard.controller';
-import { addRoom, deleteRoom, getRoomsByProperty, updateRoom } from '@/controllers/room.controller';
-import { AdminGuard, VerifyToken } from '@/middlewares/log.niddleware';
+import { addRoom, deleteRoom, getRoomsByProperty, updateRoom } from '../controllers/room.controller';
+import { AdminGuard, VerifyToken } from '../middlewares/log.niddleware';
 import { Router } from 'express';
 import express from 'express';
 

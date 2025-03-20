@@ -1,7 +1,7 @@
 import express from "express";
-import { checkUserReview, createReview, getReviewsByProperty, getUserReviews } from "@/controllers/review.controller";
-import { AdminGuard, VerifyToken } from "@/middlewares/log.niddleware";
-import { getTenantReviews } from "@/controllers/reviewTenant.controller";
+import { checkUserReview, createReview, getReviewsByProperty, getUserReviews } from "../controllers/review.controller";
+import { AdminGuard, VerifyToken } from "../middlewares/log.niddleware";
+import { getTenantReviews } from "../controllers/reviewTenant.controller";
 
 const router = express.Router();
 

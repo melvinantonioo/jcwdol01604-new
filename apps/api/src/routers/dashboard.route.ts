@@ -1,6 +1,6 @@
-import { deleteProperty, getTenantDashboardProperties, updateProperty } from '@/controllers/dashboard.controller';
-import { softDeleteProperty } from '@/controllers/softDelete.controller';
-import { AdminGuard, VerifyToken } from '@/middlewares/log.niddleware';
+import { deleteProperty, getTenantDashboardProperties, updateProperty } from '../controllers/dashboard.controller';
+import { softDeleteProperty } from '../controllers/softDelete.controller';
+import { AdminGuard, VerifyToken } from '../middlewares/log.niddleware';
 import express from 'express';
 
 const router = express.Router();
