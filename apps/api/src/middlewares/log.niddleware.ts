@@ -7,9 +7,13 @@ async function VerifyToken(req: Request, res: Response, next: NextFunction) {
     try {
         const token = req.header("Authorization")?.replace("Bearer ", "");
 
+        console.log("🔹 Received Token:", token);  // 🔥 Tambahkan ini untuk debugging
+
         if (!token) throw new Error("Unauthorized");
 
         const user = verify(token, process.env.SECRET_KEY as string);
+
+        console.log("✅ Token Valid:", user);  // 🔥 Cek apakah token berhasil diverifikasi
 
         if (!user) throw new Error("Unauthorized");
 
